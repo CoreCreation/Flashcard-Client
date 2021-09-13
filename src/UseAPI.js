@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function useAPI(){
@@ -7,8 +6,8 @@ export default function useAPI(){
 
     useEffect(() => {
         async function getFlashcards() {
-            axios.get("http://localhost:8080/api/v1/flashcard").then((res) => {
-                setFlascards(res.data);
+            fetch('http://localhost:8080/api/v1/flashcard', {methdo:"GET"}).then((res) => {
+                res.json().then(data => setFlascards(data));
             }).catch((error) => {
                 console.log(error);
             })

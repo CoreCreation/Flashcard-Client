@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 
 export default function FlashcardForm() {
@@ -6,14 +5,18 @@ export default function FlashcardForm() {
     const [front, setFront] = useState("front");
     const [back, setBack] = useState("back");
 
-    function handleSubmit() {
-        axios.post('localhost:8080/api/v1/flashcard', {
+    async function handleSubmit() {
+        fetch('http://localhost:8080/api/v1/flashcard', {
+          method: "POST",
+          body: JSON.stringify({
             front: front,
             back: back
-        }).catch(error => {
-            alert(error);
-        })
-    }
+          }),
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8"
+          }
+        });
+      }
 
     return (
         <form>
